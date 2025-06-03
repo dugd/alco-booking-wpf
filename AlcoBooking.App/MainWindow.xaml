@@ -3,26 +3,73 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AlcoBooking.App"
         xmlns:vm="clr-namespace:AlcoBooking.App.ViewModels"
         mc:Ignorable="d"
-        Title="Book Manager" Height="400" Width="600">
+        Title="Book Manager" Height="500" Width="800">
+
+    <!-- Styles -->
+    <Window.Resources>
+        <Style x:Key="ActionButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="MinWidth" Value="80"/>
+            <Setter Property="Padding" Value="6,3"/>
+        </Style>
+        <Style x:Key="BooksDataGridStyle" TargetType="DataGrid">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="RowBackground" Value="#F9F9F9"/>
+            <Setter Property="AlternatingRowBackground" Value="#EFEFEF"/>
+        </Style>
+    </Window.Resources>
+
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    <StackPanel Orientation="Vertical">
-        <DataGrid ItemsSource="{Binding Books}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedBook}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Binding="{Binding Title}" />
-                <DataGridTextColumn Header="Author" Binding="{Binding Author}" />
-                <DataGridTextColumn Header="Year" Binding="{Binding Year}" />
-            </DataGrid.Columns>
-        </DataGrid>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
-            <Button Content="Add" Command="{Binding AddCommand}" />
-            <Button Content="Edit" Command="{Binding EditCommand}" />
-            <Button Content="Delete" Command="{Binding DeleteCommand}" />
-        </StackPanel>
 
-    </StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            
+            <!-- Filters -->
+            <RowDefinition Height="Auto"/>
+            <!-- Table -->
+            <RowDefinition Height="*"/>
+            <!-- Action -->
+            <RowDefinition Height="Auto"/>
+            
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Пошук книг" Grid.Row="0" Margin="10">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Назва:" VerticalAlignment="Center"/>
+                <TextBox Width="200"
+                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                 Margin="5,0"/>
+                <Button Content="Знайти"
+                Command="{Binding SearchCommand}"
+                Style="{StaticResource ActionButtonStyle}"/>
+                <Button Content="Скинути"
+                Command="{Binding ResetFilterCommand}"
+                Style="{StaticResource ActionButtonStyle}"/>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Список книг" Grid.Row="1" Margin="10">
+            <DataGrid ItemsSource="{Binding Books}"
+                SelectedItem="{Binding SelectedBook}"
+                Style="{StaticResource BooksDataGridStyle}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="*"/>
+                    <DataGridTextColumn Header="Author" Binding="{Binding Author}" Width="2*"/>
+                    <DataGridTextColumn Header="Year" Binding="{Binding Year}" Width="Auto"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource ActionButtonStyle}"/>
+            <Button Content="Edit" Command="{Binding EditCommand}" Style="{StaticResource ActionButtonStyle}"/>
+            <Button Content="Delete" Command="{Binding DeleteCommand}" Style="{StaticResource ActionButtonStyle}"/>
+        </StackPanel>
+    </Grid>
 </Window>
