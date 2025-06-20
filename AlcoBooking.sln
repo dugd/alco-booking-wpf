@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlcoBooking.Service", "Alco
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlcoBooking.Algorithms", "AlcoBooking.Algorithms\AlcoBooking.Algorithms.csproj", "{8E8144CD-044B-4EF8-A63D-41FA7B923494}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlcoBooking.AlcoTester", "AlcoBooking.AlcoTester\AlcoBooking.AlcoTester.csproj", "{4E0AE583-561C-4FE1-AAF8-44D3ED89DA77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlcoBooking.Seed", "AlcoBooking.Seed\AlcoBooking.Seed.csproj", "{A174EECE-E8BC-4D19-9B9F-683F7D12F162}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{8E8144CD-044B-4EF8-A63D-41FA7B923494}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E8144CD-044B-4EF8-A63D-41FA7B923494}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E8144CD-044B-4EF8-A63D-41FA7B923494}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E0AE583-561C-4FE1-AAF8-44D3ED89DA77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E0AE583-561C-4FE1-AAF8-44D3ED89DA77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E0AE583-561C-4FE1-AAF8-44D3ED89DA77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E0AE583-561C-4FE1-AAF8-44D3ED89DA77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A174EECE-E8BC-4D19-9B9F-683F7D12F162}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A174EECE-E8BC-4D19-9B9F-683F7D12F162}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A174EECE-E8BC-4D19-9B9F-683F7D12F162}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A174EECE-E8BC-4D19-9B9F-683F7D12F162}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

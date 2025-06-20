@@ -18,7 +18,7 @@ namespace AlcoBooking.App.ViewModels
         
         public MainWindowViewModel()
         {
-            var dbContext = new LiteDBContex("books.db");
+            var dbContext = new LiteDbContext("books.db");
             var repo = new BookRepository(dbContext);
             _service = new BookCrudService(repo);
             Load();

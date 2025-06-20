@@ -9,9 +9,9 @@ namespace AlcoBooking.Service
 
         public BookCrudService(BookRepository repository) => _repo = repository;
 
-        public Book Add(string title, string author, int year)
+        public Book Add(string title, string author, int year, string content)
         {
-            Book book = new Book { Title = title, Author = author, Year = year };
+            Book book = new Book { Title = title, Author = author, Year = year, Content = content };
             _repo.Add(book);
             return book;
         }
