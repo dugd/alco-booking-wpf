@@ -12,7 +12,8 @@ namespace AlcoBooking.Service
         public Book Add(string title, string author, int year)
         {
             Book book = new Book { Title = title, Author = author, Year = year };
-            return _repo.Create(book);
+            _repo.Add(book);
+            return book;
         }
 
         public bool Update(Guid id, string title, string author, int year)
@@ -27,7 +28,7 @@ namespace AlcoBooking.Service
         {
             var book = _repo.GetById(id);
             if (book is null) return false;
-            return _repo.Delete(book);
+            return _repo.Delete(book.Id);
         }
 
         public IEnumerable<Book> List() => _repo.GetAll();

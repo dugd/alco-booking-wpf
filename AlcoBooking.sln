@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlcoBooking.Data", "AlcoBoo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlcoBooking.Service", "AlcoBooking.Service\AlcoBooking.Service.csproj", "{A358345D-4FB2-444A-9ECF-400B0C9E80F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlcoBooking.Algorithms", "AlcoBooking.Algorithms\AlcoBooking.Algorithms.csproj", "{8E8144CD-044B-4EF8-A63D-41FA7B923494}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{A358345D-4FB2-444A-9ECF-400B0C9E80F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A358345D-4FB2-444A-9ECF-400B0C9E80F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A358345D-4FB2-444A-9ECF-400B0C9E80F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E8144CD-044B-4EF8-A63D-41FA7B923494}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E8144CD-044B-4EF8-A63D-41FA7B923494}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E8144CD-044B-4EF8-A63D-41FA7B923494}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E8144CD-044B-4EF8-A63D-41FA7B923494}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,16 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AlcoBooking.Core.Models
 {
-    public class Book
+    public class Book : IComparable<Book>
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public string Title {  get; set; }
-        public string Author { get; set; }
+        public string Title { get; set; } = string.Empty;
+        public string Author { get; set; } = string.Empty;
         public int Year { get; set; }
+
+        public string Content { get; set; } = string.Empty;
+
+        public int ContentLength => Content.Length;
+
+        public int CompareTo(Book? other)
+        {
+            if (other == null) return 1;
+            return ContentLength.CompareTo(other.ContentLength);
+        }
     }
 }

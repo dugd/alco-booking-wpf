@@ -4,13 +4,20 @@ namespace AlcoBooking.Data
 {
     public class BookRepository
     {
-        private readonly LiteDBContex _context;
-        public BookRepository(LiteDBContex context) => _context = context;
+        private readonly LiteDbContext _context;
 
-        public Book Create(Book book)
+        public BookRepository(LiteDbContext context)
         {
-            _context.Books.Insert(book);
-            return book;
+            _context = context;
+        }
+
+        public IEnumerable<Book> GetAll() => _context.Books.FindAll();
+
+        public Book? GetById(Guid id) => _context.Books.FindById(id);
+
+        public Guid Add(Book book)
+        {
+            return _context.Books.Insert(book);
         }
 
         public bool Update(Book book)
@@ -18,19 +25,9 @@ namespace AlcoBooking.Data
             return _context.Books.Update(book);
         }
 
-        public bool Delete(Book book)
-        {
-            return _context.Books.Delete(book.Id);
-        }
+        public bool Delete(Guid id) => _context.Books.Delete(id);
 
-        public Book? GetById(Guid id)
-        {
-            return _context.Books.FindById(id);
-        }
-
-        public IEnumerable<Book> GetAll()
-        {
-            return _context.Books.FindAll();
-        }
+        public IEnumerable<Book> FindByTitle(string title) =>
+            _context.Books.Find(b => b.Title.Contains(title, StringComparison.OrdinalIgnoreCase));
     }
 }
