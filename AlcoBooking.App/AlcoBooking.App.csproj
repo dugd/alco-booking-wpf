@@ -9,8 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AlcoBooking.Algorithms\AlcoBooking.Algorithms.csproj" />
     <ProjectReference Include="..\AlcoBooking.Core\AlcoBooking.Core.csproj" />
     <ProjectReference Include="..\AlcoBooking.Data\AlcoBooking.Data.csproj" />
+    <ProjectReference Include="..\AlcoBooking.Seed\AlcoBooking.Seed.csproj" />
     <ProjectReference Include="..\AlcoBooking.Service\AlcoBooking.Service.csproj" />
   </ItemGroup>
 

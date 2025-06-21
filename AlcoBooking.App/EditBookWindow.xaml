@@ -1,0 +1,46 @@
+﻿<Window x:Class="AlcoBooking.App.EditBookWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:AlcoBooking.App.ViewModels"
+        mc:Ignorable="d"
+        Title="Книга" Height="300" Width="400"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="0 5">
+            <Label Content="Назва:" Width="80"/>
+            <TextBox Text="{Binding Title}" Width="250"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0 5">
+            <Label Content="Автор:" Width="80"/>
+            <TextBox Text="{Binding Author}" Width="250"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0 5">
+            <Label Content="Рік:" Width="80"/>
+            <TextBox Text="{Binding Year}" Width="100"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0 5">
+            <Label Content="Огляд:" Width="80" VerticalAlignment="Top"/>
+            <TextBox Text="{Binding Content}" Width="250" Height="100" AcceptsReturn="True" TextWrapping="Wrap"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Right" Margin="0 10 0 0">
+            <Button Content="OK" Width="80" Margin="5" IsDefault="True" Click="Ok_Click"/>
+            <Button Content="Скасувати" Width="80" Margin="5" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

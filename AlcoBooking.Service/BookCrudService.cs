@@ -16,11 +16,11 @@ namespace AlcoBooking.Service
             return book;
         }
 
-        public bool Update(Guid id, string title, string author, int year)
+        public bool Update(Guid id, string title, string author, int year, string content)
         {
             var book = _repo.GetById(id);
             if (book is null) return false;
-            book.Title = title; book.Author = author; book.Year = year;
+            book.Title = title; book.Author = author; book.Year = year; book.Content = content;
             return _repo.Update(book);
         }
 

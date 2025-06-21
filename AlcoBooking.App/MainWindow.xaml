@@ -5,21 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:AlcoBooking.App.ViewModels"
         mc:Ignorable="d"
-        Title="Book Manager" Height="500" Width="800">
+        Title="Book Manager" MinHeight="500" MinWidth="800"
+        SizeToContent="Manual"
+        WindowStartupLocation="CenterScreen"
+        Background="#FAFAFA">
 
-    <!-- Styles -->
     <Window.Resources>
         <Style x:Key="ActionButtonStyle" TargetType="Button">
             <Setter Property="Margin" Value="5"/>
-            <Setter Property="MinWidth" Value="80"/>
-            <Setter Property="Padding" Value="6,3"/>
+            <Setter Property="MinWidth" Value="100"/>
+            <Setter Property="Padding" Value="6,4"/>
         </Style>
+
         <Style x:Key="BooksDataGridStyle" TargetType="DataGrid">
             <Setter Property="Margin" Value="10"/>
             <Setter Property="AutoGenerateColumns" Value="False"/>
             <Setter Property="CanUserAddRows" Value="False"/>
             <Setter Property="RowBackground" Value="#F9F9F9"/>
             <Setter Property="AlternatingRowBackground" Value="#EFEFEF"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="SelectionUnit" Value="FullRow"/>
+        </Style>
+
+        <Style x:Key="BorderBaseStyle" TargetType="Border">
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Background" Value="#EAEAEA"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
         </Style>
     </Window.Resources>
 
@@ -29,47 +41,87 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            
-            <!-- Filters -->
             <RowDefinition Height="Auto"/>
-            <!-- Table -->
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <!-- Action -->
             <RowDefinition Height="Auto"/>
-            
         </Grid.RowDefinitions>
 
-        <GroupBox Header="Пошук книг" Grid.Row="0" Margin="10">
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Назва:" VerticalAlignment="Center"/>
-                <TextBox Width="200"
-                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                 Margin="5,0"/>
-                <Button Content="Знайти"
-                Command="{Binding SearchCommand}"
-                Style="{StaticResource ActionButtonStyle}"/>
-                <Button Content="Скинути"
-                Command="{Binding ResetFilterCommand}"
-                Style="{StaticResource ActionButtonStyle}"/>
+        <Menu Grid.Row="0">
+            <MenuItem Header="Згенерувати..." Command="{Binding GenerateCommand}"/>
+            <MenuItem Header="Алгоритми">
+                <MenuItem Header="Сортування">
+                    <MenuItem Header="Bubble Sort" IsCheckable="True" CommandParameter="bubble"/>
+                    <MenuItem Header="Merge Sort" IsCheckable="True" CommandParameter="merge"/>
+                </MenuItem>
+                <MenuItem Header="Пошук">
+                    <MenuItem Header="Лінійний пошук" IsCheckable="True" CommandParameter="linear"/>
+                    <MenuItem Header="Бінарний пошук" IsCheckable="True" CommandParameter="binary"/>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <Border Grid.Row="1" Style="{StaticResource BorderBaseStyle}" BorderThickness="0,0,0,1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center">
+                    <Label Content="Пошук:" VerticalAlignment="Center"/>
+                    <ComboBox Width="100" Margin="5,0"
+                              SelectedItem="{Binding SearchField}"
+                              ItemsSource="{Binding FieldOptions}" VerticalContentAlignment="Center"/>
+
+                    <TextBox Width="150" Margin="5,0"
+                             Text="{Binding SearchText}" 
+                             ToolTip="Введіть значення для пошуку" VerticalContentAlignment="Center"/>
+
+                    <Button Content="Пошук" 
+                            Command="{Binding SearchCommand}"
+                            Style="{StaticResource ActionButtonStyle}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Label Content="Сортувати за:" VerticalAlignment="Center"/>
+                    <ComboBox Width="100" Margin="5,0"
+                              SelectedItem="{Binding SortField}"
+                              ItemsSource="{Binding FieldOptions}" VerticalContentAlignment="Center"/>
+
+                    <CheckBox Content="Зростання" 
+                              IsChecked="{Binding SortAscending}" 
+                              VerticalAlignment="Center" Margin="5,0"/>
+
+                    <Button Content="Сортувати" 
+                            Command="{Binding SortCommand}" 
+                            Style="{StaticResource ActionButtonStyle}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <GroupBox Header="Список книг" Grid.Row="2" Margin="10" FontWeight="Bold">
+            <Grid>
+                <DataGrid ItemsSource="{Binding Books}"
+                          SelectedItem="{Binding SelectedBook, Mode=TwoWay}"
+                          Style="{StaticResource BooksDataGridStyle}"
+                          IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Назва" Binding="{Binding Title}" Width="2*"/>
+                        <DataGridTextColumn Header="Автор" Binding="{Binding Author}" Width="2*"/>
+                        <DataGridTextColumn Header="Рік" Binding="{Binding Year}" Width="Auto"/>
+                        <DataGridTextColumn Header="Огляд" Binding="{Binding Content}" Width="3*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </GroupBox>
+
+        <Border Grid.Row="3" Style="{StaticResource BorderBaseStyle}" BorderThickness="1,1,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Додати" Command="{Binding AddCommand}" Style="{StaticResource ActionButtonStyle}"/>
+                <Button Content="Редагувати" Command="{Binding EditCommand}" Style="{StaticResource ActionButtonStyle}"/>
+                <Button Content="Видалити" Command="{Binding DeleteCommand}" Style="{StaticResource ActionButtonStyle}"/>
             </StackPanel>
-        </GroupBox>
-
-        <GroupBox Header="Список книг" Grid.Row="1" Margin="10">
-            <DataGrid ItemsSource="{Binding Books}"
-                SelectedItem="{Binding SelectedBook}"
-                Style="{StaticResource BooksDataGridStyle}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="*"/>
-                    <DataGridTextColumn Header="Author" Binding="{Binding Author}" Width="2*"/>
-                    <DataGridTextColumn Header="Year" Binding="{Binding Year}" Width="Auto"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </GroupBox>
-
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-            <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource ActionButtonStyle}"/>
-            <Button Content="Edit" Command="{Binding EditCommand}" Style="{StaticResource ActionButtonStyle}"/>
-            <Button Content="Delete" Command="{Binding DeleteCommand}" Style="{StaticResource ActionButtonStyle}"/>
-        </StackPanel>
+        </Border>
     </Grid>
 </Window>
