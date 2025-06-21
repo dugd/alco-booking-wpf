@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace AlcoBooking.Algoritms.RSA
+namespace AlcoBooking.Algorithms.RSA
 {
     public class RsaKey
     {
@@ -13,6 +13,11 @@ namespace AlcoBooking.Algoritms.RSA
         {
             Exponent = exponent;
             Modulus = modulus;
+        }
+
+        public BigInteger Apply(BigInteger input)
+        {
+            return BigInteger.ModPow(input, Exponent, Modulus);
         }
     }
 }
